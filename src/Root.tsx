@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { HelloWorld } from "./compositions/HelloWorld";
 import { PrudentiaTeaser } from "./compositions/PrudentiaTeaser";
+import { EvolutionStablesIntro } from "./compositions/EvolutionStablesIntro";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -21,6 +22,14 @@ export const RemotionRoot: React.FC = () => {
         id="PrudentiaTeaser"
         component={PrudentiaTeaser}
         durationInFrames={270}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="EvolutionStablesIntro"
+        component={EvolutionStablesIntro}
+        durationInFrames={450}
         fps={30}
         width={1920}
         height={1080}
