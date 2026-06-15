@@ -1,7 +1,10 @@
 import { Composition } from "remotion";
 import { HelloWorld } from "./compositions/HelloWorld";
 import { PrudentiaTeaser } from "./compositions/PrudentiaTeaser";
-import { EvolutionStablesIntro } from "./compositions/EvolutionStablesIntro";
+import {
+  EvolutionStablesIntro,
+  defaultEvolutionStablesIntroProps,
+} from "./compositions/EvolutionStablesIntro";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -29,10 +32,11 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="EvolutionStablesIntro"
         component={EvolutionStablesIntro}
-        durationInFrames={450}
+        durationInFrames={1200}
         fps={30}
-        width={1920}
-        height={1080}
+        width={1080}
+        height={1920}
+        defaultProps={defaultEvolutionStablesIntroProps}
       />
     </>
   );
