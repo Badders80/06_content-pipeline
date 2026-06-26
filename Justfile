@@ -1,32 +1,12 @@
-# ═══════════════════════════════════════════════════════════
-# Taskmaster Control Tower
-# ═══════════════════════════════════════════════════════════
+# 06_content-pipeline — Remotion renders
 
-# List all tasks
-task-list:
-    @python3 ../_taskmaster/task_list.py
+default:
+    @just --list
 
-# Show the next ready task
-task-next:
-    @python3 ../_taskmaster/task_next.py
+# List registered compositions
+compositions:
+    npx ts-node scripts/render.ts --help
 
-# Show task details
-task-show id:
-    @python3 ../_taskmaster/task_show.py {{id}}
-
-# Mark task as in-progress
-task-start id:
-    @python3 ../_taskmaster/task_start.py {{id}}
-
-# Mark task as done
-task-done id:
-    @python3 ../_taskmaster/task_done.py {{id}}
-
-# Create a sprint markdown file from task IDs
-sprint-start name *tasks:
-    @python3 ../_taskmaster/sprint_start.py "--tasks={{tasks}}" "{{name}}"
-
-# Launch the interactive Dev Portal and Control Tower
-task-web:
-    @python3 ../_taskmaster/server.py
-
+# Render one composition
+render id:
+    npx remotion render src/index.ts "{{id}}" "out/{{id}}.mp4"
