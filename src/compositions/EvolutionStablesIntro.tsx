@@ -46,7 +46,7 @@ export const defaultEvolutionStablesIntroProps: EvolutionStablesIntroProps = {
   lockupSrc: staticFile("lockup-vertical-border-grey.svg"),
   horseImage: staticFile("horse_gallop_sunlight.png"),
   raceImage: staticFile("race_scene.png"),
-  jockeyImage: staticFile("jockey_masa.png"),
+  jockeyImage: staticFile("jockey_masa_cutout.png"),
 };
 
 export const EvolutionStablesIntro: React.FC<
@@ -351,24 +351,10 @@ export const EvolutionStablesIntro: React.FC<
             position: "absolute",
             inset: 0,
             opacity: scene4Opacity * outroOpacity,
+            backgroundColor: "#000",
           }}
         >
-          {/* Layer 1a: dark top surface so the background name reads */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "42%",
-              zIndex: 1,
-              background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 70%, transparent 100%)",
-              opacity: confirmedOpacity,
-            }}
-          />
-
-          {/* Layer 1b: massive stacked jockey name BEHIND the subject */}
+          {/* Layer 1: "CONFIRMED: MASA HASHIZUME" text split around the subject */}
           <div
             style={{
               position: "absolute",
@@ -377,63 +363,89 @@ export const EvolutionStablesIntro: React.FC<
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "flex-start",
-              paddingTop: 55,
               opacity: confirmedOpacity,
             }}
           >
+            <p
+              style={{
+                marginTop: 55,
+                fontSize: 28,
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+                color: GOLD,
+                textTransform: "uppercase",
+                marginBottom: 8,
+              }}
+            >
+              Confirmed:
+            </p>
             <span
               style={{
-                fontSize: 165,
+                fontSize: 120,
                 fontWeight: 900,
-                letterSpacing: "0.06em",
-                lineHeight: 0.75,
+                letterSpacing: "0.02em",
+                lineHeight: 0.85,
                 color: "#fff",
                 textTransform: "uppercase",
-                textShadow: "0 4px 20px rgba(0,0,0,0.7)",
               }}
             >
               {jockeyName?.split(" ")[0]}
             </span>
             <span
               style={{
-                fontSize: 165,
+                marginTop: 260,
+                fontSize: 120,
                 fontWeight: 900,
-                letterSpacing: "0.06em",
-                lineHeight: 0.75,
+                letterSpacing: "0.02em",
+                lineHeight: 0.85,
                 color: "#fff",
                 textTransform: "uppercase",
-                textShadow: "0 4px 20px rgba(0,0,0,0.7)",
               }}
             >
               {jockeyName?.split(" ").slice(1).join(" ")}
             </span>
           </div>
 
-          {/* Layer 2: jockey image sits IN FRONT of the background name */}
-          <div style={{ position: "absolute", inset: 0, zIndex: 2 }}>
-            <KenBurnsBackground
+          {/* Layer 2: transparent jockey cutout sits IN FRONT of the text */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Img
               src={jockeyImage!}
-              objectPosition="center 22%"
-              startScale={1.05}
-              endScale={1.0}
-              startFrame={SCENE3_END}
-              endFrame={SCENE4_END}
+              style={{
+                width: "155%",
+                height: "155%",
+                objectFit: "contain",
+                objectPosition: "center 48%",
+                transform: `scale(${interpolate(
+                  frame,
+                  [SCENE3_END, SCENE4_END],
+                  [1.02, 1.0],
+                  { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+                )})`,
+              }}
             />
           </div>
 
-          {/* Layer 3: bottom gradient for foreground readability */}
+          {/* Layer 3: bottom gradient for CTA readability */}
           <div
             style={{
               position: "absolute",
               inset: 0,
               zIndex: 3,
               background:
-                "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.65) 30%, transparent 65%)",
+                "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 30%, transparent 65%)",
             }}
           />
 
-          {/* Layer 4: foreground CTA + confirmed pill IN FRONT of everything */}
+          {/* Layer 4: foreground CTA IN FRONT of everything */}
           <div
             style={{
               position: "absolute",
@@ -443,40 +455,17 @@ export const EvolutionStablesIntro: React.FC<
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "flex-end",
-              paddingBottom: 110,
+              paddingBottom: 120,
               opacity: ctaOpacity,
             }}
           >
-            {/* Confirmed pill */}
-            <div
-              style={{
-                padding: "10px 24px",
-                borderRadius: 999,
-                backgroundColor: GOLD,
-                marginBottom: 20,
-                transform: `scale(${ctaScale})`,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 18,
-                  fontWeight: 800,
-                  letterSpacing: "0.16em",
-                  color: "#000",
-                  textTransform: "uppercase",
-                }}
-              >
-                Confirmed Rider
-              </span>
-            </div>
-
             <h2
               style={{
-                fontSize: 76,
+                fontSize: 78,
                 fontWeight: 900,
                 letterSpacing: "-0.02em",
                 lineHeight: 0.92,
-                color: "#fff",
+                color: GOLD,
                 textTransform: "uppercase",
                 textAlign: "center",
                 textShadow: "0 4px 40px rgba(0,0,0,0.95)",
@@ -491,7 +480,7 @@ export const EvolutionStablesIntro: React.FC<
                 fontSize: 26,
                 fontWeight: 500,
                 letterSpacing: "0.14em",
-                color: GOLD,
+                color: "#fff",
                 textTransform: "uppercase",
               }}
             >

@@ -5,6 +5,10 @@ import {
   EvolutionStablesIntro,
   defaultEvolutionStablesIntroProps,
 } from "./compositions/EvolutionStablesIntro";
+import {
+  AlmanzorNightDanzaPromo,
+  defaultAlmanzorNightDanzaProps,
+} from "./compositions/AlmanzorNightDanzaPromo";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -37,6 +41,15 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={defaultEvolutionStablesIntroProps}
+      />
+      <Composition
+        id="AlmanzorNightDanzaPromo"
+        component={AlmanzorNightDanzaPromo}
+        durationInFrames={1200}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={defaultAlmanzorNightDanzaProps}
       />
     </>
   );

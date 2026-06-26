@@ -36,3 +36,15 @@ __pycache__/
 *.webm
 !public/**/*.mp4
 !src/**/*.mp4
+
+# Windows download metadata / agent scratch
+*:Zone.Identifier
+.claude/
+
+# Staging dumps (canonical assets live in public/)
+content/002/
+
+# Large unused source posters (compositions use public/ assets)
+public/masa_poster.png
+public/jockey_masa_clean.pngcontent/001/Dark-Theme Racing Poster for Masa Hashizume (1).png
+content/001/Gemini_Generated_Image_eu3lb3eu3lb3eu3l.png
